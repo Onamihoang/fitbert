@@ -10,6 +10,8 @@ from transformers import (
     BertTokenizer,
     DistilBertForMaskedLM,
     DistilBertTokenizer,
+    AlbertForMaskedLM,
+    AlbertTokenizer
 )
 
 
@@ -33,6 +35,8 @@ class FitBert:
         if not model:
             if "distilbert" in model_name:
                 self.bert = DistilBertForMaskedLM.from_pretrained(model_name)
+            elif "Albert" in model_name:
+                self.bert = AlbertForMaskedLM.from_pretrained(model_name)
             else:
                 self.bert = BertForMaskedLM.from_pretrained(model_name)
             self.bert.to(self.device)
@@ -42,6 +46,8 @@ class FitBert:
         if not tokenizer:
             if "distilbert" in model_name:
                 self.tokenizer = DistilBertTokenizer.from_pretrained(model_name)
+            elif "Albert" in model_name:
+                self.tokenizer = AlbertTokenizer.from_pretrained(model_name)
             else:
                 self.tokenizer = BertTokenizer.from_pretrained(model_name)
         else:
@@ -189,7 +195,7 @@ class FitBert:
         ranked_options = (seq(ranked_pairs).map(lambda x: x[1])).list()     # rank options
         ranked_options_prob = (seq(ranked_pairs).map(lambda x: x[0])).list()    # rank xac suat options
         return ranked_options, ranked_options_prob
-
+    
     
     # don gian hoa lua chon / tra ve dap an-chuoi da thay the - tu bat dau - tu ket thuc
     def _simplify_options(self, sent: str, options: List[str]):
