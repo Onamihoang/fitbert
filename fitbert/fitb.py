@@ -47,7 +47,7 @@ class FitBert:
             if "distilbert" in model_name:
                 self.tokenizer = DistilBertTokenizer.from_pretrained(model_name)
             elif "Albert" in model_name:
-                self.tokenizer = AlbertTokenizer.from_pretrained(model_name)
+                self.tokenizer = AlbertTokenizer.from_pretrained(bert-large-uncased)
             else:
                 self.tokenizer = BertTokenizer.from_pretrained(model_name)
         else:
