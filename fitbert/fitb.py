@@ -83,7 +83,8 @@ class FitBert:
             .starmap(lambda i, x: self._tokens_to_masked_ids(tokens, i))
             .list()
         )
-
+        print("input_ids:  " + input_ids)
+        
         tens = torch.tensor(input_ids).to(self.device)          # chuyen vao thanh tensor [n x 1]
         with torch.no_grad():
             preds = self.bert(tens)[0]                          # qua model de tinh toan ket qua [n x m]
